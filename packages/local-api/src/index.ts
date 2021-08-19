@@ -1,5 +1,9 @@
+import express from 'express'
+
 export const serve = (port: number, filename: string, dir: string) => {
-  console.log(
-    `Serving on port ${port} with filename of ${filename} and directory of ${dir}`
-  )
+  const app = express()
+
+  app.listen(port, () => {
+    console.log('Server running in port ' + port)
+  })
 }
