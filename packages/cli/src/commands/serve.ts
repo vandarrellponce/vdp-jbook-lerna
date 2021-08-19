@@ -1,13 +1,14 @@
 import { Command } from 'commander'
 import { serve } from 'local-api'
+import path from 'path'
 
 export const serveCommand = new Command()
-  .command('serve [filename]') // [] brackets means that this is an optional value for commander
+  .command('serve [filename]')
   .description('Open a file for editing')
-  .option('-port, --port <number>', 'port to run the server on', '4005') // <> brackets means that is a required value for commander
+  .option('-port, --port <number>', 'port to run the server on', '4005')
   .action((filename = 'notebook.js', options: { port: string }) => {
-    // first arg is the optional value, next is an object with required value
-    console.log(filename, options)
+    const dir = path.join(process.cwd(), path.dirname(filename))
+    const basename = path.basename(filename)
 
-    serve(Number(options.port), filename, 'asd')
+    serve(Number(options.port), basename, dir)
   })
