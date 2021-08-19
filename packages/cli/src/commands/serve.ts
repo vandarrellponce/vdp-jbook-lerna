@@ -13,6 +13,10 @@ export const serveCommand = new Command()
 
       await serve(Number(options.port), basename, dir)
     } catch (error) {
-      console.log(error.message)
+      if (error.code === 'EADDRINUSE')
+        console.log('Port is already in use, try running on a different port.')
+      else console.log(error.message)
     }
+
+    process.exit(1)
   })

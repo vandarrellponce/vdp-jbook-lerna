@@ -8,7 +8,12 @@ var express_1 = __importDefault(require("express"));
 var serve = function (port, filename, dir) {
     var app = express_1.default();
     return new Promise(function (resolve, reject) {
-        app.listen(port, resolve).on('error', reject);
+        app
+            .listen(port, function () {
+            console.log("Opened " + filename + ", navigate to http://localhost:" + port);
+            return resolve;
+        })
+            .on('error', reject);
     });
 };
 exports.serve = serve;

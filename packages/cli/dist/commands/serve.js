@@ -63,9 +63,14 @@ exports.serveCommand = new commander_1.Command()
                     return [3 /*break*/, 3];
                 case 2:
                     error_1 = _a.sent();
-                    console.log(error_1.message);
+                    if (error_1.code === 'EADDRINUSE')
+                        console.log('Port is already in use, try running on a different port.');
+                    else
+                        console.log(error_1.message);
                     return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
+                case 3:
+                    process.exit(1);
+                    return [2 /*return*/];
             }
         });
     });
