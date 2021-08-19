@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.serveCommand = void 0;
 var commander_1 = require("commander");
+var local_api_1 = require("local-api");
 exports.serveCommand = new commander_1.Command()
     .command('serve [filename]') // [] brackets means that this is an optional value for commander
     .description('Open a file for editing')
@@ -10,4 +11,5 @@ exports.serveCommand = new commander_1.Command()
     if (filename === void 0) { filename = 'notebook.js'; }
     // first arg is the optional value, next is an object with required value
     console.log(filename, options);
+    local_api_1.serve(Number(options.port), filename, 'asd');
 });
