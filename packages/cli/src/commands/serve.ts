@@ -2,6 +2,8 @@ import { Command } from 'commander'
 import { serve } from 'local-api'
 import path from 'path'
 
+const isProduction = process.env.NODE_ENV === 'production'
+
 export const serveCommand = new Command()
   .command('serve [filename]')
   .description('Open a file for editing')
@@ -11,7 +13,7 @@ export const serveCommand = new Command()
       const dir = path.join(process.cwd(), path.dirname(filename))
       const basename = path.basename(filename)
 
-      await serve(Number(options.port), basename, dir)
+      await serve(Number(options.port), basename, dir, !isProduction)
     } catch (error) {
       if (error.code === 'EADDRINUSE')
         console.log('Port is already in use, try running on a different port.')
