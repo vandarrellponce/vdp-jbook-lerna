@@ -46,6 +46,7 @@ var path_1 = __importDefault(require("path"));
 var createCellsRouter = function (filename, dir) {
     var fullPath = path_1.default.join(dir, filename);
     var router = express_1.default.Router();
+    router.use(express_1.default.json());
     router
         .route('/cells')
         .get(function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
@@ -53,7 +54,7 @@ var createCellsRouter = function (filename, dir) {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 2, , 3]);
+                    _a.trys.push([0, 2, , 6]);
                     return [4 /*yield*/, promises_1.default.readFile(fullPath, { encoding: 'utf-8' })
                         //Send list of cells back the the browser
                     ];
@@ -61,17 +62,18 @@ var createCellsRouter = function (filename, dir) {
                     result = _a.sent();
                     //Send list of cells back the the browser
                     res.status(200).send(JSON.parse(result));
-                    return [3 /*break*/, 3];
+                    return [3 /*break*/, 6];
                 case 2:
                     error_1 = _a.sent();
-                    if (error_1.code === 'ENOENT') {
-                        // Add code to create a file and add default cells
-                    }
-                    else {
-                        throw error_1;
-                    }
-                    return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
+                    if (!(error_1.code === 'ENOENT')) return [3 /*break*/, 4];
+                    return [4 /*yield*/, promises_1.default.writeFile(fullPath, '[]', 'utf-8')];
+                case 3:
+                    _a.sent();
+                    res.send([]);
+                    return [3 /*break*/, 5];
+                case 4: throw error_1;
+                case 5: return [3 /*break*/, 6];
+                case 6: return [2 /*return*/];
             }
         });
     }); })
