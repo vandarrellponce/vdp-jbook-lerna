@@ -48,13 +48,33 @@ var createCellsRouter = function (filename, dir) {
     var router = express_1.default.Router();
     router
         .route('/cells')
-        .get(function (req, res) {
-        // Make sure the cells storage file exists
-        // If file does not exit, make a default list of cells
-        // Read the file
-        // Parse a list of file out of it
-        //Send list of cells back the the browser
-    })
+        .get(function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+        var result, error_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, promises_1.default.readFile(fullPath, { encoding: 'utf-8' })
+                        //Send list of cells back the the browser
+                    ];
+                case 1:
+                    result = _a.sent();
+                    //Send list of cells back the the browser
+                    res.status(200).send(JSON.parse(result));
+                    return [3 /*break*/, 3];
+                case 2:
+                    error_1 = _a.sent();
+                    if (error_1.code === 'ENOENT') {
+                        // Add code to create a file and add default cells
+                    }
+                    else {
+                        throw error_1;
+                    }
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
+        });
+    }); })
         .post(function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
         var cells;
         return __generator(this, function (_a) {
