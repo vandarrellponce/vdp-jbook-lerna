@@ -1,6 +1,15 @@
 import express, { Request, Response } from 'express'
+import fs from 'fs/promises'
+import path from 'path'
+
+interface Cell {
+  id: string
+  content: string
+  type: 'text' | 'code'
+}
 
 export const createCellsRouter = (filename: string, dir: string) => {
+  const fullPath = path.join(dir, filename)
   const router = express.Router()
 
   router
@@ -13,11 +22,13 @@ export const createCellsRouter = (filename: string, dir: string) => {
       //Send list of cells back the the browser
     })
     .post(async (req: Request, res: Response) => {
-      // Make sure the file exists
-      // If not, create it
       // Take the list of cells from the req object
-      // Serialize them
+      const { cells }: { cells: Cell[] } = req.body
+
       // Write the cells into the file storage
+      await fs.writeFile(fullPath, JSON.stringify(cells), 'utf-8')
+
+      res.status(201).send({ status: 'ok' })
     })
 
   return router
