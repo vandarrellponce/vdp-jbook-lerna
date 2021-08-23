@@ -1,0 +1,12 @@
+.buttons-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  opacity: 0.25;
+  transition: opacity 300ms;
+}
+
+.buttons-wrapper:hover {
+  opacity: 1;
+}
