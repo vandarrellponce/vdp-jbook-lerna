@@ -1,5 +1,5 @@
 {
-  "name": "local-api",
+  "name": "@vdp-cli/local-api",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
@@ -21,6 +21,6 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "http-proxy-middleware": "^2.0.1",
-    "local-client": "^0.1.0"
+    "@vdp-cli/local-client": "^0.1.0"
   }
 }

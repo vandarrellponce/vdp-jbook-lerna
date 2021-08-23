@@ -1,5 +1,5 @@
 {
-  "name": "cli",
+  "name": "vdp-cli",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "commander": "^8.1.0",
-    "local-api": "^1.0.0"
+    "@vdp-cli/local-api": "^1.0.0"
   },
   "devDependencies": {
     "@types/node": "^16.6.1",
